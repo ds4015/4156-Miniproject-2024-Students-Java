@@ -1,10 +1,13 @@
 package dev.coms4156.project.individualproject;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Test class for Course.java
+ */
 
 @SpringBootTest
 @ContextConfiguration
