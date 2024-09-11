@@ -1,6 +1,6 @@
 package dev.coms4156.project.individualproject;
 
-import java.io.Serializaable;
+import java.io.Serializable;
 
 /**
  * Represents a course within an educational institution.
