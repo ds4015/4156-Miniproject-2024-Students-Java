@@ -75,14 +75,14 @@ public class DepartmentUnitTests {
 
   @Test
   public void testCreateCourse() {
-    String courseID = "PSYC 4493";
+    String courseId = "PSYC 4493";
     String instr = "Jennifer Blaze";
     String loc = "200 SCH";
     String time = "2:10-4:00";
     int cap = 15;
-    testDept.createCourse(courseID, instr, loc, time, cap);
+    testDept.createCourse(courseId, instr, loc, time, cap);
   }
-/*
+  /*
   @Test
   public void testGetCourseSelection() {
     String[] times = {"11:40-12:55", "4:10-5:25", "", "2:40-3:55"};
