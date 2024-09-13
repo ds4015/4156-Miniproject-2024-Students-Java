@@ -1,66 +1,32 @@
 package dev.coms4156.project.individualproject;
 
-import jakarta.annotation.PreDestroy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 import java.util.HashMap;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
-* Class contains all the startup logic for the application.
-*
-* <p>DO NOT MODIFY ANYTHING BELOW THIS POINT WITH REGARD TO FUNCTIONALITY
-* YOU MAY MAKE STYLE/REFACTOR MODIFICATIONS AS NEEDED
-*/
-@SpringBootApplication
-public class IndividualProjectApplication implements CommandLineRunner {
+ * Test class for RouteController.java
+ */
 
-  /**
-  * The main launcher for the service all it does
-  * is make a call to the overridden run method.
-  *
-  * @param args A {@code String[]} of any potential
-  *             runtime arguments
-  */
-  public static void main(String[] args) {
-    SpringApplication.run(IndividualProjectApplication.class, args);
-  }
+@SpringBootTest
+public class IndividualProjectApplicationUnitTests {
 
-  /**
-  * This contains all the setup logic, it will mainly be focused
-  * on loading up and creating an instance of the database based
-  * off a saved file or will create a fresh database if the file
-  * is not present.
-  *
-  * @param args A {@code String[]} of any potential runtime args
-  */
-  public void run(String[] args) {
-    for (String arg : args) {
-      if (arg.equals("setup")) {
-        myFileDatabase = new MyFileDatabase(1, "./data.txt");
-        resetDataFile();
-        System.out.println("System Setup");
-        return;
-      }
-    }
-    myFileDatabase = new MyFileDatabase(0, "./data.txt");
-    System.out.println("Start up");
-  }
+  @Autowired
+  private IndividualProjectApplication indivProjApp;
 
-  /**
-  * Overrides the database reference, used when testing.
-  *
-  * @param testData A {@code MyFileDatabase} object referencing test data.
-  */
-  public static void overrideDatabase(MyFileDatabase testData) {
-    myFileDatabase = testData;
-    saveData = false;
-  }
+  @Test
+  public void testResetDataFile() {
 
-  /**
-  * Allows for data to be reset in event of errors.
-  */
-  public void resetDataFile() {
+    MyFileDatabase testFileDatabase = new MyFileDatabase(1, "./data2.txt");
+    HashMap<String, Department> testDeptMapping;
+
     String[] times = {"11:40-12:55", "4:10-5:25", "", "2:40-3:55"};
     String[] locations = {"417 IAB", "309 HAV", "301 URIS"};
 
@@ -280,24 +246,9 @@ public class IndividualProjectApplication implements CommandLineRunner {
     Department psyc = new Department("PSYC", courses, "Nim Tottenham", 437);
     mapping.put("PSYC", psyc);
 
-    myFileDatabase.setMapping(mapping);
+    testFileDatabase.setMapping(mapping);
+    indivProjApp.resetDataFile();
+
+    assertEquals(indivProjApp.myFileDatabase, testFileDatabase);
   }
-
-  /**
-  * This contains all the overheading teardown logic, it will
-  * mainly be focused on saving all the created user data to a
-  * file, so it will be ready for the next setup.
-  */
-  @PreDestroy
-  public void onTermination() {
-    System.out.println("Termination");
-    if (saveData) {
-      myFileDatabase.saveContentsToFile();
-    }
-  }
-
-
-  //Database Instance
-  public static MyFileDatabase myFileDatabase;
-  private static boolean saveData = true;
 }
