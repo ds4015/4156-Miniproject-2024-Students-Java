@@ -1,18 +1,14 @@
 package dev.coms4156.project.individualproject;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import java.util.HashMap;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * Test class for RouteController.java
+ * Test class for IndividualProjectApplication.java
  */
 
 @SpringBootTest
@@ -24,7 +20,6 @@ public class IndividualProjectApplicationUnitTests {
   @Test
   public void testResetDataFile() {
 
-    MyFileDatabase testFileDatabase = new MyFileDatabase(1, "./data2.txt");
     HashMap<String, Department> testDeptMapping;
 
     String[] times = {"11:40-12:55", "4:10-5:25", "", "2:40-3:55"};
@@ -246,6 +241,7 @@ public class IndividualProjectApplicationUnitTests {
     Department psyc = new Department("PSYC", courses, "Nim Tottenham", 437);
     mapping.put("PSYC", psyc);
 
+    MyFileDatabase testFileDatabase = new MyFileDatabase(1, "./data2.txt");
     testFileDatabase.setMapping(mapping);
     indivProjApp.resetDataFile();
 

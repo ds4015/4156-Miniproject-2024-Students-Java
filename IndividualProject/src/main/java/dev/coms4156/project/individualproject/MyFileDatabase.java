@@ -7,8 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class represents a file-based database containing department mappings.
@@ -34,7 +34,7 @@ public class MyFileDatabase {
    *
    * @param mapping the mapping of department names to Department objects
    */
-  public void setMapping(HashMap<String, Department> mapping) {
+  public void setMapping(Map<String, Department> mapping) {
     this.departmentMapping = mapping;
   }
 
@@ -43,7 +43,7 @@ public class MyFileDatabase {
    *
    * @return the deserialized department mapping
    */
-  public HashMap<String, Department> deSerializeObjectFromFile() {
+  public Map<String, Department> deSerializeObjectFromFile() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
       if (obj instanceof HashMap) {
@@ -52,7 +52,7 @@ public class MyFileDatabase {
         throw new IllegalArgumentException("Invalid object type in file.");
       }
     } catch (IOException | ClassNotFoundException e) {
-      e.printStackTrace();
+      logger.error("Input file stream class not found exception", e);
       return null;
     }
   }
@@ -64,9 +64,9 @@ public class MyFileDatabase {
   public void saveContentsToFile() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
       out.writeObject(departmentMapping);
-      System.out.println("Object serialized successfully.");
+      logger.info("Object serialized successfully.");
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error("Input file stream class not found exception", e);
     }
   }
 
@@ -75,7 +75,7 @@ public class MyFileDatabase {
    *
    * @return the department mapping
    */
-  public HashMap<String, Department> getDepartmentMapping() {
+  public Map<String, Department> getDepartmentMapping() {
     return this.departmentMapping;
   }
 
@@ -99,5 +99,6 @@ public class MyFileDatabase {
   private String filePath;
 
   /** The mapping of department names to Department objects. */
-  private HashMap<String, Department> departmentMapping;
+  private Map<String, Department> departmentMapping;
+  Logger logger = LoggerFactory.getLogger(MyFileDatabase.class);
 }
