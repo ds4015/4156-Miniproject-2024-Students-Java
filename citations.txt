@@ -1,0 +1,27 @@
+Dallas Scott - ds4015@columbia.edu
+
+Individual Assignment 1: Citations.txt
+
+
+Below are sources which I consulted for part 1 of the assignment.  I did not use any AI sources and did not copy any code.  I used these resources to learn about various aspects of the assignment and for things such as learning which commands to run in the terminal to be able to generate reports.
+
+
+https://stackoverflow.com/questions/22836455/jacoco-report-generation-using-maven
+
+         I consulted this thread on StackOverflow to determine how to generate the Jacoco coverage report from the jacoco.exec file after I ran my tests in Maven.  I discovered from this source the proper command to run was mvn jacoco:report.
+
+
+https://docs.oracle.com/en/java/
+         
+         I referenced the official Java documentation files to determine which import packages contained particular classes, interfaces, and exceptions during code cleanup to replace import statements using an asterisk.
+
+
+
+https://www.baeldung.com/junit-assertions
+
+         I used this web page to learn about assertion tests Assertion tests and how they are called/performed.
+
+
+https://spring.io/guides/gs/testing-web
+
+         I referenced the official Spring documentation to learn about Autowired in order to be able to create an instance of RouteController for my unit tests.

@@ -1,0 +1,369 @@
+﻿Dallas Scott - ds4015@columbia.edu
+
+
+Individual Assignment 1:  Bugs.txt
+
+
+The following are a list of bugs found by my static bug finder (PMD) as well as those not detected by the bug finder but by simply going through the code and my own unit tests.  
+
+
+
+
+COURSE.JAVA
+
+
+MissingOverride:  The method 'toString()' is missing an @Override annotation. (Line 64)
+
+
+Added Override annotation to toString() method
+
+
+Missing conditional for enroll student (always returns false) (Line 34)
+        
+        Added conditional branches - if course is not full, increment and return true, else return false
+
+
+Missing conditional for drop student (always returns false) (Line 47)
+
+
+Added conditional branches - if enrolledStudents > 0, drop and return true, else false
+
+
+Wrong variable returned for getCourseLocation() (returns instructor name) (Line 56)
+
+
+        Changed to return location
+
+
+Wrong variable returned for getInstructorName() (returns course location) (Line 62)
+
+
+        Changed to return instructor name
+
+
+
+
+DEPARTMENT.JAVA
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 25)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 56)
+
+
+        Changed HashMap to Map
+
+
+MissingOverride:  The method 'toString()' is missing an @Override annotation. (Line 104)
+
+
+        Added Override annotation to toString() method 
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 117)
+
+
+        Changed HashMap to Map
+
+
+UnusedPrivateField:  Avoid unused private fields such as ‘departmentChair’ (Line 118)
+
+
+        Removed quotes around “this.departmentChair” in method getDepartmentChair()
+
+
+toString returns String literal “result.toString()” rather than converting result to a string (Line 112)
+
+
+        Removed quotes around “result.toString()” in return statement
+
+
+dropPersonFromMajor() method does not check if number of majors is greater than 0  (Line 69)
+
+
+        Added if branch with call to getNumberOfMajors() to test whether greater than 0 before decrement
+
+
+getNumberOfMajors() returns a negative result (Line 37)
+        Removed negative sign in front of variable name in return statement
+
+
+Unused import for HashMap after fixing LooseCoupling violations
+        Removed import for HashMap, leaving import for Map
+
+
+
+
+INDIVIDUALPROJECTAPPLICATION.JAVA
+
+
+MissingOverride:  The method ‘run(String[])’ is missing an @Override annotation (Line 37)
+
+
+        Added Override annotation
+
+
+LiteralsFirstInComparisons:  Position literals first in String comparisons (Line 39)
+
+
+        Replaced arg.equals(“setup”) with “setup”.equals(arg)
+
+
+SystemPrintln:  Usage of System.out/err (Line 45)
+
+
+        Used logger to print out setup message
+
+
+SystemPrintln:  Usage of System.out/err (Line 50)
+
+
+        Used logger to print out start message
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 84)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 94)
+
+
+        Changed HashMap to Map
+
+
+SystemPrintln:  Usage of System.out/err (Line 296)
+        Used logger to print out termination message
+
+
+
+
+MYFILEDATABASE.JAVA
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 37)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 46)
+
+
+        Changed HashMap to Map
+
+
+AvoidPrintStackTrace:  Avoid printStackTrace(); use a logger call instead (Line 55)
+
+
+        Used logger to log exception
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 78)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 102)
+
+
+        Changed HashMap to Map
+
+
+
+
+ROUTECONTROLLER.JAVA
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 42)
+
+
+        Changed HashMap to Map
+
+
+Incorrect HttpStatus in retrieveDepartment() (Line 49)
+
+
+        When department code not in mapping, HttpStatus should be NOT_FOUND; changed
+
+
+Incorrect HttpStatus in retrieveDepartment() (Line 51)
+        When department code in mapping, HttpStatus should be OK; changed
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 77)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 79)
+
+
+        Changed HashMap to Map
+
+
+Incorrect HttpStatus in retrieveCourse() (Line 88)
+
+
+        When course found, changed HttpStatus from FORBIDDEN to OK
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 117)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 119)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 148)
+
+
+        Changed HashMap to Map
+
+
+Negative number of majors in getMajorCtFromDept method (Line 153)
+
+
+        Removed negative sign in front of method calls which return number of majors
+
+
+Incorrect HttpStatus in getMajorCtFromDept (Line 156)
+
+
+        When department not found, changed HttpStatus from FORBIDDEN to NOT_FOUND
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 174)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 206)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 208)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 244)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 246)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 282)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 284)
+
+
+        Changed HashMap to Map
+
+
+UnusedLocalVariable:  Avoid unused local variables such as ‘requestedCourse’ (Line 287)
+
+
+        Replaced “some time” with  requestedCourse.getCourseTimeSlot()
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 312)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 339)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 371)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 373)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 414)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 416)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 451)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 453)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 489)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 491)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 527)
+
+
+        Changed HashMap to Map
+
+
+LooseCoupling:  Avoid using implementation types like ‘HashMap’; use the interface instead (line 529)
+
+
+        Changed HashMap to Map
+
+
+SystemPrintln:  Usage of System.our/err (Line 545)
+        Used logger to log exception in handleException method

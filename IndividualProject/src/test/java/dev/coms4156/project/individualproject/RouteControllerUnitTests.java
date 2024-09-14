@@ -2,25 +2,12 @@ package dev.coms4156.project.individualproject;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
 
 import java.util.HashMap;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -33,9 +20,12 @@ public class RouteControllerUnitTests {
   @Autowired
   private RouteController routeController;
 
+  /**
+  *  Build department before each test.
+  */
   @BeforeEach
   public void buildObjects() {
-    Course course = new Course("Patricia G Lindemann","501 SCH", "1:10-2:25", 200);
+    Course course = new Course("Patricia G Lindemann", "501 SCH", "1:10-2:25", 200);
 
     String[] times = {"11:40-12:55", "4:10-5:25", "", "2:40-3:55"};
     Course psyc1001 = new Course("Patricia G Lindemann", "501 SCH", "1:10-2:25", 200);
@@ -69,9 +59,9 @@ public class RouteControllerUnitTests {
   @Test
   public void testIndex() {
     String expectedResult = "Welcome, in order to make an API call direct your browser"
-      + " or Postman to an endpoint "
-      + "\n\n This can be done using the following format: \n\n http:127.0.0"
-      + ".1:8080/endpoint?arg=value";
+        + " or Postman to an endpoint "
+        + "\n\n This can be done using the following format: \n\n http:127.0.0"
+        + ".1:8080/endpoint?arg=value";
 
     assertEquals(expectedResult, routeController.index());
   }
@@ -93,14 +83,14 @@ public class RouteControllerUnitTests {
   @Test
   public void testRetrieveCourseSuccess() {
 
-    ResponseEntity<?> response = routeController.retrieveCourse("PSYC",1001);
+    ResponseEntity<?> response = routeController.retrieveCourse("PSYC", 1001);
     assertThat(response.getStatusCode().value()).isEqualTo(403);
   }
 
   @Test
   public void testRetrieveCourseFail() {
 
-    ResponseEntity<?> response = routeController.retrieveCourse("PSYC",3293);
+    ResponseEntity<?> response = routeController.retrieveCourse("PSYC", 3293);
     assertThat(response.getStatusCode().value()).isEqualTo(400);
   }
 
@@ -108,7 +98,7 @@ public class RouteControllerUnitTests {
   @Test
   public void testIsCourseFullSuccess() {
 
-    ResponseEntity<?> response = routeController.isCourseFull("PSYC",1001);
+    ResponseEntity<?> response = routeController.isCourseFull("PSYC", 1001);
     System.out.println(response.getBody());
     assertThat(response.getBody()).isEqualTo(true);
   }
@@ -116,13 +106,14 @@ public class RouteControllerUnitTests {
   @Test
   public void testIsCourseFullFail() {
 
-    ResponseEntity<?> response = routeController.isCourseFull("PSYC",2235);
+    ResponseEntity<?> response = routeController.isCourseFull("PSYC", 2235);
     assertThat(response.getBody()).isEqualTo(false);
   }
+
   @Test
   public void testIsCourseFullFail2() {
 
-    ResponseEntity<?> response = routeController.isCourseFull("PHYS",9999);
+    ResponseEntity<?> response = routeController.isCourseFull("PHYS", 9999);
     assertThat(response.getBody()).isEqualTo("Course Not Found");
   }
 
@@ -132,6 +123,7 @@ public class RouteControllerUnitTests {
     ResponseEntity<?> response = routeController.getMajorCtFromDept("PHYS");
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
+
   @Test
   public void testGetMajorCountFromDeptFail() {
 
@@ -145,6 +137,7 @@ public class RouteControllerUnitTests {
     ResponseEntity<?> response = routeController.identifyDeptChair("PHYS");
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
+
   @Test
   public void testDisplayDeptChairFail() {
 
@@ -155,27 +148,28 @@ public class RouteControllerUnitTests {
   @Test
   public void testFindCourseLocationSuccess() {
 
-    ResponseEntity<?> response = routeController.findCourseLocation("PHYS",1001);
+    ResponseEntity<?> response = routeController.findCourseLocation("PHYS", 1001);
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
+
   @Test
   public void testFindCourseLocationFail() {
 
-    ResponseEntity<?> response = routeController.findCourseLocation("COMS",9234);
+    ResponseEntity<?> response = routeController.findCourseLocation("COMS", 9234);
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
   @Test
   public void testFindCourseTime() {
 
-    ResponseEntity<?> response = routeController.findCourseTime("ECON",4415);
+    ResponseEntity<?> response = routeController.findCourseTime("ECON", 4415);
     assertThat(response.getStatusCode().value()).isEqualTo(202);
   }
 
   @Test
   public void testFindCourseTimeFail() {
 
-    ResponseEntity<?> response = routeController.findCourseTime("ECON",3316);
+    ResponseEntity<?> response = routeController.findCourseTime("ECON", 3316);
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
@@ -192,6 +186,7 @@ public class RouteControllerUnitTests {
     ResponseEntity<?> response = routeController.addMajorToDept("ITAL");
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
+
   @Test
   public void testRemoveMajorFromDept() {
 
@@ -209,77 +204,79 @@ public class RouteControllerUnitTests {
   @Test
   public void testDropStudentFromCourse() {
 
-    ResponseEntity<?> response = routeController.dropStudent("ECON",4710);
+    ResponseEntity<?> response = routeController.dropStudent("ECON", 4710);
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
 
   @Test
   public void testDropStudentFromCourseFail() {
 
-    ResponseEntity<?> response = routeController.dropStudent("ITAL",1244);
+    ResponseEntity<?> response = routeController.dropStudent("ITAL", 1244);
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
   @Test
   public void testDropStudentFromCourseFail2() {
 
-    ResponseEntity<?> response = routeController.dropStudent("ECON",1931);
+    ResponseEntity<?> response = routeController.dropStudent("ECON", 1931);
     assertThat(response.getStatusCode().value()).isEqualTo(400);
   }
 
   @Test
   public void testSetEnrollmentCount() {
 
-    ResponseEntity<?> response = routeController.setEnrollmentCount("ECON",4710, 26);
+    ResponseEntity<?> response = routeController.setEnrollmentCount("ECON", 4710, 26);
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
 
   @Test
   public void testSetEnrollmentCountFail() {
 
-    ResponseEntity<?> response = routeController.setEnrollmentCount("ECON",1931, 31);
+    ResponseEntity<?> response = routeController.setEnrollmentCount("ECON", 1931, 31);
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
   @Test
   public void testChangeTimeOfCourse() {
 
-    ResponseEntity<?> response = routeController.changeCourseTime("ECON",4710, "4:10-5:25");
+    ResponseEntity<?> response = routeController.changeCourseTime("ECON", 4710, "4:10-5:25");
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
 
   @Test
   public void testChangeTimeOfCourseFail() {
 
-    ResponseEntity<?> response = routeController.changeCourseTime("ECON",1931, "10:20-12:00");
+    ResponseEntity<?> response = routeController.changeCourseTime("ECON", 1931, "10:20-12:00");
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
   @Test
   public void testChangeInstructor() {
 
-    ResponseEntity<?> response = routeController.changeCourseTeacher("ECON",4710, "Griffin Newbold.");
+    ResponseEntity<?> response = routeController.changeCourseTeacher("ECON", 4710,
+        "Griffin Newbold.");
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
 
   @Test
   public void testChangeInstructorFail() {
 
-    ResponseEntity<?> response = routeController.changeCourseTeacher("ECON",1931, "Griffin Newbold");
+    ResponseEntity<?> response = routeController.changeCourseTeacher("ECON", 1931,
+        "Griffin Newbold");
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
   @Test
   public void testChangeLocation() {
 
-    ResponseEntity<?> response = routeController.changeCourseLocation("ECON",4710, "IAB 417.");
+    ResponseEntity<?> response = routeController.changeCourseLocation("ECON", 4710, "IAB 417.");
     assertThat(response.getStatusCode().value()).isEqualTo(200);
   }
 
   @Test
   public void testChangeLocationFail() {
 
-    ResponseEntity<?> response = routeController.changeCourseLocation("ECON",1931, "HAV 309");
+    ResponseEntity<?> response = routeController.changeCourseLocation("ECON", 1931, "HAV 309");
     assertThat(response.getStatusCode().value()).isEqualTo(404);
   }
 
